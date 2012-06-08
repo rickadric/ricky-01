@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'index.jsp' starting page</title>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,key">
+	<meta http-equiv="description" content="This is my page">
+	<script src="js/underscore.js" type="text/javascript"></script>
+	<script src="js/backbone.js" type="text/javascript"></script>
+	
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript">
+		Person = Backbone.Model.extend({
+			initialize: function(){
+				console.log('Hello world');
+				this.bind("change:name",function(){
+					console.log(this.get('name') + " is now the name for it");
+				});
+				this.bind("error",function(model, error){
+					console.log(error);
+				});
+			},
+			defaults:{
+				name:	"",
+				height:	"tall"
+			},
+			validate: function(attributes){
+				if(attributes.name == "LiYu"){
+					console.log("You are the right person");
+				}
+				else{
+					return "Wrong";
+				}
+			}
+		});
+		var person = new Person({height:"6 feet"});
+		person.set("name","LiYu");
+		console.log(person.get('name'));
+		console.log(person.toJSON());
+	</script>
+  </head>
+  
+  <body>
+    This is my JSP page. <br>
+  </body>
+</html>
